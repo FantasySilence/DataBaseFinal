@@ -56,7 +56,7 @@ class FilesIO:
 
 
     @staticmethod
-    def loadUserInfo(filename: str=None) -> dict:
+    def loadUserInfo(filename: str=None) -> str:
 
         """
         加载用户信息
@@ -73,3 +73,23 @@ class FilesIO:
             return user_path
         else:
             return os.path.join(user_path, filename)
+
+
+    @staticmethod
+    def save_backup(filename: str) -> str:
+
+        """
+        加载备份保存路径
+        """
+
+        common_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        src_path = os.path.dirname(common_path)
+        ROOTPATH = os.path.dirname(src_path)
+        resources_path = os.path.join(ROOTPATH, "resources")
+        backup_path = os.path.join(resources_path, "database_backup")
+
+        # ------ 不传入文件名默认返回存储文件的文件夹 ------ #
+        if filename is None:
+            return backup_path
+        else:
+            return os.path.join(backup_path, filename)
