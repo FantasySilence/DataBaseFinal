@@ -8,9 +8,9 @@
 # =================================== #
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-from src.modules.ui.frames.menu_frame import TreeViewMenu
-from src.modules.ui.frames.login_frame import LoginWindow
-from src.modules.ui.frames.show_frame import ShowResultFrame
+from src.ui.frames.menu_frame import TreeViewMenu
+from src.ui.frames.login_frame import LoginWindow
+from src.ui.frames.show_frame import ShowResultFrame
 
 
 class MainFrame(ttk.Frame):

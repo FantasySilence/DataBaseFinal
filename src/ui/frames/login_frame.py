@@ -95,7 +95,7 @@ class LoginWindow(ttk.Frame):
 
         # ------ 登录按钮 ------ #
         login_button = ttk.Button(
-            self.button_frame, text="登陆", command=self.login,
+            self.button_frame, text="登录", command=self.login,
             bootstyle=SUCCESS,
         )
         login_button.pack(
