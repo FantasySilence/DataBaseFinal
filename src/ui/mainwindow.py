@@ -61,14 +61,15 @@ class MainFrame(ttk.Frame):
 
         self.login_frame.pack_forget()
         self.mainframe.pack(fill=BOTH, expand=YES)
-
-        # ------ 树状菜单界面 ------ #
-        menu_frame = TreeViewMenu(self.mainframe, width=390, height=800)
-        menu_frame.grid(row=0, column=0, sticky=NS)
-
+        
         # ------ 展示界面 ------ #
         show_frame = ShowResultFrame(self.mainframe, width=750, height=800)
         show_frame.grid(row=0, column=1, sticky=NS)
+
+        # ------ 树状菜单界面 ------ #
+        menu_frame = TreeViewMenu(self.mainframe, show_frame, width=390, height=800)
+        menu_frame.grid(row=0, column=0, sticky=NS)
+
 
 
     @staticmethod
@@ -76,7 +77,7 @@ class MainFrame(ttk.Frame):
         root = ttk.Window(
             title="数据库期末项目 v0.2", themename="minty", size=(1140, 800)
         )
-        root.resizable(False, False)
+        # root.resizable(False, False)
         MainFrame(root)
         root.mainloop()
 
