@@ -64,3 +64,89 @@ PROVINCE_AREA = {
 
 # ------ 直辖市 ------ #
 DIRECT_CITY = ["北京", "天津", "上海", "重庆"]
+
+# ------ 查询命令 ------ #
+SQL_COMMAND = {
+    # ------ 第一问 ------ #
+    "1.1": [
+        "exec investmentscale ", [
+            "时间", "固定资产投资总额", "国有经济投资占比", 
+            "集体经济投资占比", "私营经济投资占比", "股份制经济投资占比"
+        ]
+    ],
+    "1.2": ["exec investmentdifference ", ["地区", "时间", "固定资产"]],
+    "1.4": ["exec SRGinPandemic ", ["省份", "受影响省份个数", "总数", "占比"]],
+
+    # ------ 第二问 ------ #
+    "2.1": [
+        "drop table GDPcorr_table; exec GDP_corr; select City, Province, GDP_corr from GDPcorr_table order by GDP_corr;",
+        ["城市", "省份", "GDP_corr"]
+    ],
+    "2.2": [
+        "exec ComparisonGDP_per ", ["结果"]
+    ],
+    "2.3": [
+        """
+        declare @cap int, @dud int, @mun int, @all int;
+        select @cap = count(distinct City)/4 from comparison_GDP;
+        select @dud = count(*) from GDP_DDD_city;
+        select @mun = count(distinct City) from MunicipalityInfo;
+        select (@dud/(@mun+@cap));
+        select @all = count(distinct City) from comparison_GDP;
+        select @dud = count(*) from GDP_DUD;
+        select (@dud/@all)
+        """, ["结果"]
+    ],
+    "2.4": [
+        "exec TopGDP ", [
+            "城市", "省份", "城市GDP增长率", "全省GDP增长率"
+        ]
+    ],
+
+    # ------ 第三问 ------ #
+    "3.1": [
+        "exec industrial_structure ", [
+            "时间", "第一产业占比", "第二产业占比", "第三产业占比"
+        ]
+    ],
+    "3.2": [
+        "exec industrial_structure_compare ", [
+            "地区", "时间", "第一产业占比", "第二产业占比", "第三产业占比"
+        ]
+    ],
+    "3.3": [
+        "exec industry_mode ", [
+            "时间点", "疫情前", "疫情后", "疫情前个数", 
+            "疫情后个数", "疫情前占比", "疫情后占比" 
+        ]
+    ],
+    "3.4": ["exec FindSimilarProvince ", ["省份", "相似度"]],
+
+    # ------ 第四问 ------ #
+    "4.1": [
+        "exec income ", [
+            "省份", "时间", "第一产业占比", "第二产业占比", "第三产业占比"
+        ]
+    ],
+    "4.2": [
+        "exec income_compare ", [
+            "省份", "行政面积", "GDP", "人均GDP", "居民收入", "人口密度"
+        ]
+    ],
+    "4.3": [
+        "exec FindConsistentIncomeLevels ", ["结果"]
+    ],
+    "4.4": [
+        "select * from comparison_income", ["地区", "时间", "收入增长率"]
+    ],
+    "4.5": [
+        """
+        select s1.Region, s1.Tyear
+        from comparison_income s1, comparison_income s2
+        where s1.Region = s2.Region and
+            convert(int, s2.Tyear)=convert(int, s1.Tyear)-1 and
+            s1.Income_growthrate < s2.Income_growthrate and
+            convert(int, s1.Tyear) between 2020 and 2022;
+        """, ["地区", "年份"]
+    ],
+}
