@@ -15,6 +15,6 @@
 5.相关工具类的编写，包括文件IO，绘图模块等
 6.(暂定)部署服务器，并编写登录UI
 """
-from src.modules.ui.mainwindow import MainFrame
+from src.ui.mainwindow import MainFrame
 
 MainFrame.show()
