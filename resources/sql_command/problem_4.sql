@@ -121,4 +121,4 @@ begin
 	values ('东北地区', @Tyear, @Income_growthrate);
 	set @start = @start + 1;
 end
-
+    

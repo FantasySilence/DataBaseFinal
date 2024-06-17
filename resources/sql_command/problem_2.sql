@@ -231,7 +231,7 @@ go
 create view GDP_DDD_city as
     select s1.Province, s1.City 
 	from comparison_GDP s1, comparison_GDP s2, comparison_GDP s3
-	where s1.Tyear='2020' and s1.Tyear='2021' and s1.Tyear='2022' and
+	where s1.Tyear='2020' and s2.Tyear='2021' and s3.Tyear='2022' and
 	      s1.City=s2.City and s2.City=s3.City and
 		  s1.City in (select City from GDP_DUD) and
 		  s1.GDP_growthrate_city>0 and s2.GDP_growthrate_city>0 and
