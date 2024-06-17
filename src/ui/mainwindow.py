@@ -77,7 +77,7 @@ class MainFrame(ttk.Frame):
         root = ttk.Window(
             title="数据库期末项目 v0.2", themename="minty", size=(1140, 800)
         )
-        # root.resizable(False, False)
+        root.resizable(False, False)
         MainFrame(root)
         root.mainloop()
 
